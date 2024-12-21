@@ -16,7 +16,6 @@ function LinkAddControl() {
     const editorFocus = useEditorFocus();
     const [isDialogOpened, setIsDialogOpened] = React.useState(false);
     const [link, setLink] = React.useState('');
-    const formRef = React.createRef();
 
     const onClick = () => {
         setLink('');
@@ -31,48 +30,49 @@ function LinkAddControl() {
         setLink(ev.currentTarget.value);
     };
 
-    const handleSubmit = (ev) => {
-        ev.preventDefault();
+    const handleAddLink = () => {
         if (link === '') return;
+
         handleCloseDialog();
+
         editor.onChange(
             applyEntityToCurrentSelection(editor.editorState, entities.LINK, 'MUTABLE', {
                 url: link,
             })
         );
+
         editorFocus();
     };
 
     return (
-        <React.Fragment>
+        <>
             <ButtonControl
                 onClick={onClick}
                 text={editor.translate('controls.linkAdd.title')}
                 disabled={editor.editorState.getSelection().isCollapsed()}>
                 <LinkIcon />
             </ButtonControl>
+
             <Dialog open={isDialogOpened} onClose={handleCloseDialog}>
-                <form ref={formRef} onSubmit={handleSubmit}>
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            label={editor.translate('controls.linkAdd.labels.link')}
-                            value={link}
-                            onChange={onChangeLink}
-                            fullWidth
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button type="button" onClick={handleCloseDialog} color="primary">
-                            {editor.translate('controls.linkAdd.actions.cancel')}
-                        </Button>
-                        <Button type="submit" color="primary" disabled={link === ''}>
-                            {editor.translate('controls.linkAdd.actions.add')}
-                        </Button>
-                    </DialogActions>
-                </form>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        label={editor.translate('controls.linkAdd.labels.link')}
+                        value={link}
+                        onChange={onChangeLink}
+                        fullWidth
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button type="button" onClick={handleCloseDialog} color="primary">
+                        {editor.translate('controls.linkAdd.actions.cancel')}
+                    </Button>
+                    <Button color="primary" disabled={link === ''} onClick={handleAddLink}>
+                        {editor.translate('controls.linkAdd.actions.add')}
+                    </Button>
+                </DialogActions>
             </Dialog>
-        </React.Fragment>
+        </>
     );
 }
 

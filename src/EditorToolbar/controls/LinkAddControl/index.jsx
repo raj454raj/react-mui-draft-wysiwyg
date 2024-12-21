@@ -45,7 +45,7 @@ function LinkAddControl() {
     };
 
     return (
-        <>
+        <React.Fragment>
             <ButtonControl
                 onClick={onClick}
                 text={editor.translate('controls.linkAdd.title')}
@@ -72,7 +72,7 @@ function LinkAddControl() {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </>
+        </React.Fragment>
     );
 }
 

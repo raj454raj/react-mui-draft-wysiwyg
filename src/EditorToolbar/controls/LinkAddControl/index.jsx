@@ -16,7 +16,6 @@ function LinkAddControl() {
     const editorFocus = useEditorFocus();
     const [isDialogOpened, setIsDialogOpened] = React.useState(false);
     const [link, setLink] = React.useState('');
-    const [shouldShowError, setShouldShowError] = React.useState(false);
 
     const onClick = () => {
         setLink('');
@@ -32,18 +31,13 @@ function LinkAddControl() {
     };
 
     const handleAddLink = () => {
-        if (!link.trim()) {
-            setShouldShowError(true);
-            return;
-        }
+        if (link.trim() === '') return;
 
         // If link doesn't start with "http://" or "https://", prepend "https://"
         let sanitizedLink = link;
         if (!/^https?:\/\//i.test(link)) {
             sanitizedLink = `https://${link}`;
         }
-
-        setShouldShowError(false);
 
         handleCloseDialog();
 
@@ -73,8 +67,6 @@ function LinkAddControl() {
                         value={link}
                         onChange={onChangeLink}
                         fullWidth
-                        error={shouldShowError}
-                        helperText={shouldShowError ? 'Invalid URL' : ''}
                     />
                 </DialogContent>
                 <DialogActions>

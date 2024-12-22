@@ -31,13 +31,19 @@ function LinkAddControl() {
     };
 
     const handleAddLink = () => {
-        if (link === '') return;
+        if (link.trim() === '') return;
+
+        // If link doesn't start with "http://" or "https://", prepend "https://"
+        let sanitizedLink = link;
+        if (!/^https?:\/\//i.test(link)) {
+            sanitizedLink = `https://${link}`;
+        }
 
         handleCloseDialog();
 
         editor.onChange(
             applyEntityToCurrentSelection(editor.editorState, entities.LINK, 'MUTABLE', {
-                url: link,
+                url: sanitizedLink,
             })
         );
 

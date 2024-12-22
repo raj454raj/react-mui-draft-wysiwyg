@@ -36,7 +36,7 @@ function LinkAddControl() {
         // If link doesn't start with "http://" or "https://", prepend "https://"
         let sanitizedLink = link;
         if (!/^https?:\/\//i.test(link)) {
-            sanitizedLink = `https://${link}`;
+            sanitizedLink = `http://${link}`;
         }
 
         handleCloseDialog();

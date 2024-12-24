@@ -33,7 +33,7 @@ function LinkAddControl() {
     const handleAddLink = () => {
         if (link.trim() === '') return;
 
-        // If link doesn't start with "http://" or "https://", prepend "https://"
+        // If link doesn't start with "http://" or "https://", prepend "http://"
         let sanitizedLink = link;
         if (!/^https?:\/\//i.test(link)) {
             sanitizedLink = `http://${link}`;

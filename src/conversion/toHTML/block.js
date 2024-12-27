@@ -9,7 +9,7 @@ export const blockHTMLMap = {
     [blockStyles.H6]: 'h6',
     [blockStyles.BLOCKQUOTE]: 'blockquote',
     [blockStyles.CODE_BLOCK]: 'code',
-    [blockStyles.UNSTYLED]: 'p',
+    [blockStyles.UNSTYLED]: 'span',
     [blockStyles.ATOMIC]: 'figure',
     [blockStyles.UL]: 'li',
     [blockStyles.OL]: 'li',
